@@ -1,10 +1,22 @@
 <?php
-// require_once('/codes/connection.php');
+require_once('connection.php');
 ?>
 
 <?php
 session_start();
 
+if (isset($_POST['code_commit'])) {
+
+$code = mysqli_real_escape_string($conn, $_POST['code_pane']);
+
+$file_access = fopen("..yashlalwani/coderverse.php", "x+") or die('File Not Found');
+
+$code_write = fwrite($file_access, $code);
+
+if ($code_write == TRUE) {
+    echo "<script> alert('File Saved Successfully'); </script>";
+}
+}
 ?>
 
 <!DOCTYPE HTML>
@@ -55,7 +67,7 @@ session_start();
                 border: none;
                 font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace;
                 font-size: 15px;
-                padding: 1em;
+                padding: 1em 1.5em;
                 line-height: 28px;
                 outline: none;
                 overflow: hidden;
@@ -74,6 +86,23 @@ session_start();
                 border-left: none;
                 border-bottom: none;
                }
+               .editor-sec .button-pane {
+                width: 100%;
+                background: #f5f8f9;
+                padding: 0.7em 2em;
+                text-align: right;
+                border-top: 1px solid #e0e0e0
+               }
+               .button-pane button {
+                padding: 0.7em 1.75em;
+                font-family: inherit;
+                font-weight: 500;
+                background: #0069ff;
+                border: none;
+                color: #fff;
+                outline: 0;
+                border-radius: 3px;
+               }
                </style>
               <body>
                    <nav class="nav-wrapper">
@@ -83,8 +112,10 @@ session_start();
                         <div class="editor-start">
                             <div class="edit-tag"> Edit File </div>
                             <div class="editor-head">Coderverse.php | 40 Bytes | 30 Lines</div>
-                               <textarea class="editor-space" placeholder="Write Some Code here.."> </textarea>
+                               <textarea class="editor-space" name="code_pane" placeholder="Begin Coding in the Disrupting Codeverse Coding Ecosystem..."></textarea>
+                               <div class="button-pane"> <button type="submit" name="code_commit"> Save Changes </button> </div>
                     </div>
                     </div>
                        </body>
+</html>
 </html>
