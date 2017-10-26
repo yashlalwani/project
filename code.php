@@ -29,8 +29,8 @@ if ($code_write == TRUE) {
                }
                .nav-wrapper logo {
                 color: #fff;
-                font-family: Consolas,sans-serif;
-                font-size: 30px;
+                font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+                font-size: 22px;
                 font-weight: normal;
                 letter-spacing: 1px;
                }
