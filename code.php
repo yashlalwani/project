@@ -113,7 +113,7 @@ if ($code_write == TRUE) {
                             <div class="edit-tag"> Edit File </div>
                             <div class="editor-head">Coderverse.php | 40 Bytes | 30 Lines</div>
                                <textarea class="editor-space" name="code_pane" placeholder="Begin Coding in the Disrupting Codeverse Coding Ecosystem..."></textarea>
-                               <div class="button-pane"> <button type="submit" name="code_commit"> Save Changes </button> </div>
+                               <div class="button-pane"> <button type="submit" name="code_commit"> Commit Changes </button> </div>
                     </div>
                     </div>
                        </body>
