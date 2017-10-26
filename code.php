@@ -1,18 +1,13 @@
 <?php
-require_once('connection.php');
+// require_once('connection.php');
 ?>
 
 <?php
 session_start();
-
 if (isset($_POST['code_commit'])) {
-
 $code = mysqli_real_escape_string($conn, $_POST['code_pane']);
-
 $file_access = fopen("..yashlalwani/coderverse.php", "x+") or die('File Not Found');
-
 $code_write = fwrite($file_access, $code);
-
 if ($code_write == TRUE) {
     echo "<script> alert('File Saved Successfully'); </script>";
 }
@@ -45,9 +40,10 @@ if ($code_write == TRUE) {
                }
                .editor-sec .editor-start {
                 background: transparent;
-                border: 1px solid #ddd;
+                border: 1px solid #e0e0e0;
                 width: 980px;
-                border-radius: 3px;
+                box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .08);
+                border-radius: 5px;
                }
                .editor-sec .editor-head {
                 text-align: left;
@@ -68,9 +64,9 @@ if ($code_write == TRUE) {
                 font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace;
                 font-size: 15px;
                 padding: 1em 1.5em;
-                line-height: 28px;
+                line-height: 20px;
                 outline: none;
-                overflow: hidden;
+                overflow: auto;
                 height: 60vh;
                }
                .editor-sec .edit-tag {
@@ -79,8 +75,8 @@ if ($code_write == TRUE) {
                 font-size: 14px;
                 font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
                 float: left;
-                padding: 0.98em 2em;
-                border-radius: 3px 3px 0px 0px;
+                padding: 0.92em 2em;
+                border-radius: 3px 4px 0px 0px;
                 border: 1px solid #ddd;
                 border-top: none;
                 border-left: none;
@@ -88,20 +84,42 @@ if ($code_write == TRUE) {
                }
                .editor-sec .button-pane {
                 width: 100%;
-                background: #f5f8f9;
+                background: #fff;
                 padding: 0.7em 2em;
                 text-align: right;
+                border-radius: 0px 0px 5px 5px;
                 border-top: 1px solid #e0e0e0
                }
                .button-pane button {
                 padding: 0.7em 1.75em;
                 font-family: inherit;
-                font-weight: 500;
-                background: #0069ff;
+                font-weight: 600;
+                background: #1db954;
                 border: none;
                 color: #fff;
                 outline: 0;
                 border-radius: 3px;
+               }
+               .close-window {
+                color: #cb2431;
+                padding: 4.6px 30px;
+                background-color: #fafbfc;
+                font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+                font-weight: 500;
+                border-radius: 3px;
+                background-image: linear-gradient(-180deg, #fafbfc 0%, #eff3f6 90%);
+                line-height: 23px;
+                position: relative;
+                top: 2px;
+                margin: 0px 10px;
+                display: inline-block;
+                cursor: pointer;
+                border: 1px solid rgba(27,31,35,0.2);
+               }
+               .close-window:hover {
+                background-image: linear-gradient(-180deg, #de4450 0%, #cb2431 90%);
+                border-color: rgba(27,31,35,0.5);
+                color: #fff;
                }
                </style>
               <body>
@@ -110,12 +128,23 @@ if ($code_write == TRUE) {
             </nav>
                      <div class="editor-sec">
                         <div class="editor-start">
-                            <div class="edit-tag"> Edit File </div>
+                            <div class="edit-tag"><svg aria-hidden="true" class="octicon octicon-code" height="16" version="1.1" viewBox="0 0 14 16" width="14" style="
+    position: relative;
+    top: 3px;
+    left: -4px;
+"><path fill-rule="evenodd" d="M9.5 3L8 4.5 11.5 8 8 11.5 9.5 13 14 8 9.5 3zm-5 0L0 8l4.5 5L6 11.5 2.5 8 6 4.5 4.5 3z"></path></svg>
+                             Edit File </div>
                             <div class="editor-head">Coderverse.php | 40 Bytes | 30 Lines</div>
                                <textarea class="editor-space" name="code_pane" placeholder="Begin Coding in the Disrupting Codeverse Coding Ecosystem..."></textarea>
-                               <div class="button-pane"> <button type="submit" name="code_commit"> Commit Changes </button> </div>
+                               <div class="button-pane"><div onclick="javascript:close_window();" class="close-window"> Close File </div>
+                                <button type="submit" name="code_commit"> Commit Changes </button> 
+                                </div>
                     </div>
                     </div>
                        </body>
-</html>
-</html>
+<script type="text/javascript">
+function close_window() {
+    window.open('','_self').close();
+}
+            </script>
+                       </html>
