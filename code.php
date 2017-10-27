@@ -1,13 +1,16 @@
 <?php
-// require_once('connection.php');
+require_once('connection.php');
 ?>
 
 <?php
 session_start();
 if (isset($_POST['code_commit'])) {
 $code = mysqli_real_escape_string($conn, $_POST['code_pane']);
-$file_access = fopen("..yashlalwani/coderverse.php", "x+") or die('File Not Found');
-$code_write = fwrite($file_access, $code);
+$code_slashed = str_replace(array('\n', '\r'), ' ', $code);
+$code_slashed = str_replace(array("\'", '\"'), "'", $code_slashed);
+$file_access = fopen("codelines/codeverse.txt", "w+") or die('File Not Found');
+$code_write = fwrite($file_access, htmlspecialchars($code_slashed));
+
 if ($code_write == TRUE) {
     echo "<script> alert('File Saved Successfully'); </script>";
 }
@@ -135,9 +138,14 @@ if ($code_write == TRUE) {
 "><path fill-rule="evenodd" d="M9.5 3L8 4.5 11.5 8 8 11.5 9.5 13 14 8 9.5 3zm-5 0L0 8l4.5 5L6 11.5 2.5 8 6 4.5 4.5 3z"></path></svg>
                              Edit File </div>
                             <div class="editor-head">Coderverse.php | 40 Bytes | 30 Lines</div>
-                               <textarea class="editor-space" name="code_pane" placeholder="Begin Coding in the Disrupting Codeverse Coding Ecosystem..."></textarea>
+                              <form method="post"> <textarea class="editor-space" name="code_pane" placeholder="Begin Coding in the Disrupting Codeverse Coding Ecosystem..."><?php
+                          if (isset($_POST['code_commit'])) {
+                                      
+                                      echo $code_slashed;
+                          }
+                       ?></textarea>
                                <div class="button-pane"><div onclick="javascript:close_window();" class="close-window"> Close File </div>
-                                <button type="submit" name="code_commit"> Commit Changes </button> 
+                                <button type="submit" name="code_commit"> Commit Changes </button> </form> 
                                 </div>
                     </div>
                     </div>
